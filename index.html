@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zebra Software</title>
+  <meta name="description" content="Free and open-source software for Linux and Android. Making free software since 2011.">
+  <meta property="og:title" content="Zebra Software">
+  <meta property="og:description" content="Free useful software for Linux & Android.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <style>
+    :root {
+      --ink: #1a1c21;
+      --text: #383c45;
+      --muted: #6b707b;
+      --line: #e6e3df;
+      --cream: #f6efe8;
+      --cream-line: #e8ddd2;
+      --blue: #2563eb;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      line-height: 1.65;
+      background: #0b0f1a url("assets/background.jpg") center / cover fixed;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    a { color: var(--blue); font-weight: 600; text-underline-offset: 3px; }
+    a:hover { color: #1741a8; }
+
+    .site {
+      max-width: 1000px; margin: 0 auto;
+      background: #fff;
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+
+    /* header */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 22px;
+      background: linear-gradient(#26282e, #101114);
+      border-bottom: 1px solid #000;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand img { width: 42px; height: 42px; display: block; border-radius: 9px; }
+    .brand span { color: #fff; font-weight: 700; font-size: 1.3rem; letter-spacing: -.2px; }
+
+    /* layout */
+    .layout { display: grid; grid-template-columns: 190px 1fr; }
+    nav {
+      background: var(--cream);
+      border-right: 1px solid var(--cream-line);
+      padding: 22px 14px;
+    }
+    nav ul { list-style: none; margin: 0; padding: 0; }
+    nav a {
+      display: block; padding: 7px 12px; border-radius: 9px;
+      color: #6f6862; font-weight: 700; font-size: .94rem; text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    nav li + li { margin-top: 2px; }
+    nav a:hover, nav a.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    nav .gh-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin: 26px 4px 0; padding: 9px 12px; border: 0; border-radius: 8px;
+      background: var(--ink); color: #fff; font-size: .85rem; font-weight: 700; white-space: nowrap;
+    }
+    nav .gh-btn:hover { background: #000; color: #fff; }
+    nav .gh-btn svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+
+    main { padding: 36px 44px 20px; min-width: 0; }
+    section { margin-bottom: 44px; scroll-margin-top: 20px; }
+    h1, h2 { font-weight: 800; color: var(--ink); letter-spacing: -.4px; }
+    h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 16px; }
+    h1 .hl { color: var(--blue); }
+    h2 { font-size: 1.45rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--line); }
+    p { margin: 0 0 12px; }
+
+    .intro p { font-size: 1.04rem; max-width: 600px; }
+    .intro .awesome { font-weight: 700; color: var(--ink); }
+
+    /* news */
+    .post { margin: 0 0 22px; }
+    .post time { display: block; font-size: .85rem; color: var(--muted); }
+    .post h3 { margin: 2px 0 6px; font-size: 1.08rem; color: var(--ink); }
+
+    /* projects */
+    .project { padding: 4px 0 16px; border-bottom: 1px solid var(--line); }
+    .project h3 { margin: 0 0 2px; font-size: 1.02rem; color: var(--ink); }
+    .project p { margin: 0 0 4px; }
+    .project small { color: var(--muted); }
+    .more { color: var(--muted); font-style: italic; margin-top: 14px; }
+
+    /* history */
+    .history p { max-width: 640px; }
+    .programs { list-style: none; margin: 20px 0 0; padding: 0; }
+    .programs li {
+      display: grid; grid-template-columns: 170px 1fr; gap: 16px;
+      padding: 12px 0; border-top: 1px solid var(--line);
+    }
+    .programs li:last-child { border-bottom: 1px solid var(--line); }
+    .programs b { color: var(--ink); }
+    .programs .kind { display: block; font-size: .8rem; color: var(--muted); }
+
+    footer {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+      padding: 14px 44px; border-top: 1px solid var(--line);
+      font-size: .8rem; color: #8d9098;
+    }
+    footer a { color: inherit; }
+
+    @media (max-width: 760px) {
+      body { padding: 0; }
+      .site { border-radius: 0; }
+      header { padding: 10px 16px; }
+      .layout { grid-template-columns: 1fr; }
+      nav { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--cream-line); }
+      nav ul { display: flex; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; }
+      nav li + li { margin-top: 0; }
+      nav a { white-space: nowrap; padding: 7px 9px; font-size: .9rem; }
+      nav .gh-btn { margin: 0; padding: 7px 9px; flex: none; }
+      nav .gh-btn span { display: none; }
+      main { padding: 26px 20px 10px; }
+      h1 { font-size: 1.7rem; }
+      .programs li { grid-template-columns: 1fr; gap: 2px; }
+      footer { padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="brand" href="#home">
+        <img src="assets/logo.png" alt="">
+        <span>Zebra Software</span>
+      </a>
+    </header>
+
+    <div class="layout">
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#history">History</a></li>
+        </ul>
+        <a class="gh-btn" href="https://github.com/zebra-software">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </nav>
+
+      <main>
+        <section id="home" class="intro">
+          <h1>Free Useful Software For <span class="hl">Linux &amp; Android</span></h1>
+          <p>Easy to use programs for your desktop and your phone. You shouldn't have to pay for expensive software just for everyday use.</p>
+          <p>Everything we make is free and open source, and it <strong>always</strong> will be. No ads, no tracking. The code is on <a href="https://github.com/zebra-software">GitHub</a> if you want to see how it works or make it your own.</p>
+          <p class="awesome">Isn't that awesome?!</p>
+        </section>
+
+        <section id="news">
+          <h2>News</h2>
+          <article class="post">
+            <time datetime="2026-11-22">22 November 2026</time>
+            <h3>Zebra Software is back!</h3>
+            <p>Fifteen years after our first programs, the zebra is out of the stable again. We have a new home on GitHub, a new website, and a new focus: free, open-source software for Linux and Android.</p>
+          </article>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+          <div class="project">
+            <h3>zebra-software.github.io</h3>
+            <p>This website. Not the most exciting project, but every comeback has to start somewhere.</p>
+            <small>Web · <a href="https://github.com/zebra-software">Source on GitHub</a></small>
+          </div>
+          <p class="more">More projects are on the way.</p>
+        </section>
+
+        <section id="about">
+          <h2>About Us</h2>
+          <p>We make free software, same as we did back in 2011. These days it's open source and built for Linux and Android.</p>
+          <p>Found a bug or have an idea? Open an issue or a pull request on the project's repository on <a href="https://github.com/zebra-software">GitHub</a>.</p>
+        </section>
+
+        <section id="history" class="history">
+          <h2>Where It All Began</h2>
+          <p>Zebra Software started in 2011 with small, free programs for Windows. The very first one was PadLock, a simple batch script that hid a folder behind a password. Before long we were writing proper programs in Visual Basic and putting them up for download on our website.</p>
+          <p>These were the programs that started it all:</p>
+          <ul class="programs">
+            <li><div><b>PadLock</b><span class="kind">Security</span></div><span>Our first program, and the one we kept coming back to. It hid a personal folder on your computer or USB stick behind a password. Version 2.0 came with separate builds for your PC and for flash drives.</span></li>
+            <li><div><b>Text Pad</b><span class="kind">Text editor</span></div><span>A Notepad replacement with tabs, so you could have more than one document open, plus support for more file types and your own text and background colours.</span></li>
+            <li><div><b>Z Timer</b><span class="kind">Utility</span></div><span>Timer, stopwatch and alarm clock in one. When time ran out it could play a sound, open a program or open a website.</span></li>
+            <li><div><b>QuickFolder</b><span class="kind">Utility</span></div><span>For anyone tired of right-click → New → Folder. Type a name, press Enter, done. No installation needed.</span></li>
+            <li><div><b>Shutdown Panel</b><span class="kind">Utility</span></div><span>A little desktop panel with big buttons for shut down, restart and log off.</span></li>
+            <li><div><b>Text Flipper</b><span class="kind">Fun</span></div><span>Turned your text ʇxǝʇ ɹnoʎ upside down or mirrored. It also had a "spam" button, which we'll leave unexplained.</span></li>
+            <li><div><b>MultiTasks</b><span class="kind">Launcher</span></div><span>One window with shortcuts to everything you used: favourite websites, Office 2010 or the whole Adobe CS5 suite.</span></li>
+            <li><div><b>Shuffle 15</b><span class="kind">Game</span></div><span>The classic sliding number puzzle. Get the numbers in order in as few moves and as little time as possible.</span></li>
+            <li><div><b>Bouncin' Ball Breakout</b><span class="kind">Game</span></div><span>Our first real game: a breakout clone with several levels. It never quite left beta.</span></li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <span>Copyright © Zebra Software 2011–2026</span>
+      <span>Hosted on <a href="https://pages.github.com/">GitHub Pages</a></span>
+    </footer>
+  </div>
+
+  <script>
+    const links = [...document.querySelectorAll('nav a')];
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.hash === '#' + e.target.id));
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    document.querySelectorAll('main section').forEach(s => io.observe(s));
+  </script>
+</body>
+</html>
