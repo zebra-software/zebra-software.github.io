@@ -36,8 +36,7 @@
 
     .site {
       max-width: 1000px; margin: 0 auto;
-      background: #fff;
-      border-radius: 10px; overflow: hidden;
+      border-radius: 10px;
       box-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
 
@@ -47,13 +46,15 @@
       padding: 12px 22px;
       background: linear-gradient(#26282e, #101114);
       border-bottom: 1px solid #000;
+      border-radius: 10px 10px 0 0;
     }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .brand img { width: 42px; height: 42px; display: block; border-radius: 9px; }
     .brand span { color: #fff; font-weight: 700; font-size: 1.3rem; letter-spacing: -.2px; }
+    .gh-mobile { display: none; }
 
     /* layout */
-    .layout { display: grid; grid-template-columns: 190px 1fr; }
+    .layout { display: grid; grid-template-columns: 190px 1fr; background: #fff; }
     nav {
       background: var(--cream);
       border-right: 1px solid var(--cream-line);
@@ -66,7 +67,8 @@
       transition: background .15s, color .15s;
     }
     nav li + li { margin-top: 2px; }
-    nav a:hover, nav a.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    nav a.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    @media (hover: hover) { nav ul a:hover { color: var(--ink); background: rgba(255,255,255,.6); } }
     nav .gh-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       margin: 26px 4px 0; padding: 9px 12px; border: 0; border-radius: 8px;
@@ -79,7 +81,6 @@
     section { margin-bottom: 44px; scroll-margin-top: 20px; }
     h1, h2 { font-weight: 800; color: var(--ink); letter-spacing: -.4px; }
     h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 16px; }
-    h1 .hl { color: var(--blue); }
     h2 { font-size: 1.45rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--line); }
     p { margin: 0 0 12px; }
 
@@ -92,11 +93,10 @@
     .post h3 { margin: 2px 0 6px; font-size: 1.08rem; color: var(--ink); }
 
     /* projects */
-    .project { padding: 4px 0 16px; border-bottom: 1px solid var(--line); }
+    .project { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .project:first-of-type { padding-top: 4px; }
     .project h3 { margin: 0 0 2px; font-size: 1.02rem; color: var(--ink); }
     .project p { margin: 0 0 4px; }
-    .project small { color: var(--muted); }
-    .more { color: var(--muted); font-style: italic; margin-top: 14px; }
 
     /* history */
     .history p { max-width: 640px; }
@@ -113,20 +113,26 @@
       display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
       padding: 14px 44px; border-top: 1px solid var(--line);
       font-size: .8rem; color: #8d9098;
+      background: #fff; border-radius: 0 0 10px 10px;
     }
     footer a { color: inherit; }
 
     @media (max-width: 760px) {
       body { padding: 0; }
-      .site { border-radius: 0; }
+      .site, header, footer { border-radius: 0; }
       header { padding: 10px 16px; }
       .layout { grid-template-columns: 1fr; }
-      nav { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--cream-line); }
-      nav ul { display: flex; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; }
+      .gh-mobile {
+        display: flex; align-items: center; justify-content: center;
+        width: 38px; height: 38px; border-radius: 9px;
+        background: rgba(255,255,255,.1); color: #fff;
+      }
+      .gh-mobile svg { width: 20px; height: 20px; fill: currentColor; }
+      nav { min-width: 0; padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--cream-line); }
+      nav ul { display: flex; justify-content: space-between; gap: 2px; overflow-x: auto; }
       nav li + li { margin-top: 0; }
-      nav a { white-space: nowrap; padding: 7px 9px; font-size: .9rem; }
-      nav .gh-btn { margin: 0; padding: 7px 9px; flex: none; }
-      nav .gh-btn span { display: none; }
+      nav a { white-space: nowrap; padding: 7px 10px; font-size: .9rem; }
+      nav .gh-btn { display: none; }
       main { padding: 26px 20px 10px; }
       h1 { font-size: 1.7rem; }
       .programs li { grid-template-columns: 1fr; gap: 2px; }
@@ -140,6 +146,9 @@
       <a class="brand" href="#home">
         <img src="assets/logo.png" alt="">
         <span>Zebra Software</span>
+      </a>
+      <a class="gh-mobile" href="https://github.com/zebra-software" aria-label="Zebra Software on GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
     </header>
 
@@ -160,9 +169,9 @@
 
       <main>
         <section id="home" class="intro">
-          <h1>Free Useful Software For <span class="hl">Linux &amp; Android</span></h1>
+          <h1>Free and open-source software For Linux &amp; Android</h1>
           <p>Easy to use programs for your desktop and your phone. You shouldn't have to pay for expensive software just for everyday use.</p>
-          <p>Everything we make is free and open source, and it <strong>always</strong> will be. No ads, no tracking. The code is on <a href="https://github.com/zebra-software">GitHub</a> if you want to see how it works or make it your own.</p>
+          <p>Everything we make is free and open source, and it <strong>always</strong> will be. No ads, no tracking. The code is on GitHub if you want to see how it works or make it your own.</p>
           <p class="awesome">Isn't that awesome?!</p>
         </section>
 
@@ -179,16 +188,18 @@
           <h2>Projects</h2>
           <div class="project">
             <h3>zebra-software.github.io</h3>
-            <p>This website. Not the most exciting project, but every comeback has to start somewhere.</p>
-            <small>Web · <a href="https://github.com/zebra-software">Source on GitHub</a></small>
+            <p>The new home of Zebra Software, and the place to follow everything we make. New projects, releases and news all land here first, so bookmark it and check back often.</p>
           </div>
-          <p class="more">More projects are on the way.</p>
+          <div class="project">
+            <h3>More projects coming soon</h3>
+            <p>New Linux and Android projects are on the way. Stay tuned!</p>
+          </div>
         </section>
 
         <section id="about">
           <h2>About Us</h2>
           <p>We make free software, same as we did back in 2011. These days it's open source and built for Linux and Android.</p>
-          <p>Found a bug or have an idea? Open an issue or a pull request on the project's repository on <a href="https://github.com/zebra-software">GitHub</a>.</p>
+          <p>Found a bug or have an idea? Open an issue or a pull request on the project's repository on GitHub.</p>
         </section>
 
         <section id="history" class="history">
@@ -217,13 +228,30 @@
   </div>
 
   <script>
-    const links = [...document.querySelectorAll('nav a')];
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.hash === '#' + e.target.id));
-      });
-    }, { rootMargin: '-35% 0px -60% 0px' });
-    document.querySelectorAll('main section').forEach(s => io.observe(s));
+    const navLinks = [...document.querySelectorAll('nav ul a')];
+    const sections = navLinks.map(a => document.querySelector(a.hash));
+    let locked = false;   // true right after a click, until the user scrolls by hand
+
+    function setActive(hash) {
+      navLinks.forEach(a => a.classList.toggle('active', a.hash === hash));
+    }
+
+    function onScroll() {
+      if (locked) return;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let current = sections[0];
+      if (atBottom) current = sections[sections.length - 1];
+      else for (const sec of sections) if (sec.getBoundingClientRect().top <= 120) current = sec;
+      setActive('#' + current.id);
+    }
+
+    navLinks.forEach(a => a.addEventListener('click', () => { locked = true; setActive(a.hash); }));
+    ['wheel', 'touchstart', 'keydown'].forEach(ev =>
+      window.addEventListener(ev, () => { locked = false; }, { passive: true }));
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    setActive(location.hash && sections.some(s => '#' + s.id === location.hash) ? location.hash : '#home');
+    if (location.hash) locked = true;
   </script>
 </body>
 </html>
